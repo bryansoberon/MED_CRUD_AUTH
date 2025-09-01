@@ -10,7 +10,7 @@ updateTask
 
 
 import { validateSchema } from "../middlewares/validator.middleware.js";
-import { createTaskSchema } from "../schemas/tasks.schema.js";
+import { TaskSchema } from "../schemas/task.schema.js";
 
 const router = Router();
 
@@ -19,7 +19,7 @@ router.get('/tasks/:id', authRequired, getTask);
 router.post(
     '/tasks',
     authRequired, 
-    validateSchema(createTaskSchema), 
+    validateSchema(TaskSchema), 
     createTask
 );
 router.delete('/tasks/:id', authRequired, deleteTask );
