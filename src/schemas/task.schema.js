@@ -5,9 +5,7 @@ export const TaskSchema = z.object({
         required_error: "Title is required",
     }),
     description: z.string({
-        required_error: "Description is required",
-    }),
-    date: z.date({
-        required_error: "Date is required",
-    }),
+        required_error: "Description must be a string"
+    }).optional(),
+    date: z.string().datetime().optional(),
 });
