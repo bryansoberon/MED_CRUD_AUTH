@@ -11,3 +11,7 @@ npm i bcryptjs /luego para la encriptacion de password and generate token, nueva
 npm i jsonwebtoken / token p
 
 npm i coockie-parser / validacion de token en parte de route profile, permite añadir middleware
+
+//para_validaciones:
+
+npm i zod
