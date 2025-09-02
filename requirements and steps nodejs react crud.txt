@@ -15,3 +15,32 @@ npm i coockie-parser / validacion de token en parte de route profile, permite aÃ
 //para_validaciones:
 
 npm i zod
+
+
+//creacion de client
+
+cls
+
+npm create vite
+
+cd client
+
+npm install
+
+npm run dev
+
+
+//instalacion de tailwind
+
+npm install -D tailwindcss@3 postcss autoprefixer
+npx tailwindcss init -p
+
+content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+
+
+npm install react-router-dom
+
+
