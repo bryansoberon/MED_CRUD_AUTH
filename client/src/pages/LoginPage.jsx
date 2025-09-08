@@ -46,6 +46,9 @@ function LoginPage(){
                     Login
                 </button>
                 </form>
+
+                <p className='flex gap-x-2 justify-between'>No tienes cuenta ? <a href="/register" className='text-sky-500'>Registrate</a></p>
+
             </div>
         </div>
     )
