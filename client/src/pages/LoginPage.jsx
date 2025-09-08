@@ -43,7 +43,7 @@ function LoginPage(){
                         <p className='text-red-500'>Password is required</p>
                     )}
                     
-                <button type='submit'>
+                <button type='submit' className='bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-md'>
                     Login
                 </button>
                 </form>

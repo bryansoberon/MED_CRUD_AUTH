@@ -64,7 +64,7 @@ function RegisterPage(){
                 
 
 
-            <button type='submit'>
+            <button type='submit' className='bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-md' >
                 Register
             </button>
             </form>
