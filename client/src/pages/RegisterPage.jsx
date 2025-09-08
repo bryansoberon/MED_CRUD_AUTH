@@ -21,13 +21,19 @@ function RegisterPage(){
     })
 
     return(
-        <div className='bg-zinc-800 max-w-md p-10 rounded-md'>
+       <div className='flex h-[calc(100vh-100px)] items-center justify-center'>
+            <div className='bg-zinc-800 max-w-md p-10 rounded-md'>
             {
                 registerErrors.map((error, i) => (
                     <div className="bg-red-500 p-2 text-white mb-2" key={i}>{error}
                     </div>
                 ))
             }
+
+            <h1 className='text-2xl font-bold mb-3'>Registrate</h1>
+
+
+
             <form onSubmit={onSubmit}
             className='flex flex-col'
             >
@@ -62,7 +68,9 @@ function RegisterPage(){
                 Register
             </button>
             </form>
+            <p className='flex gap-x-2 justify-between'>Ya tienes una cuenta? <a href="/login" className='text-sky-500'>Login</a></p>
         </div>
+       </div>
     )
 }
 
