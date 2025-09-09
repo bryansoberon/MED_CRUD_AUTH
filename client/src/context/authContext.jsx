@@ -1,5 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
-import { loginRequest, registerRequest } from '../api/auth';
+import { loginRequest, registerRequest, verifyTokenRequest } from '../api/auth';
+import Cookies from 'js-cookie';
+import { set } from "mongoose";
 
 export const AuthContext = createContext();
 
@@ -35,6 +37,7 @@ const signin = async (user) => {
     try{
         const res = await loginRequest(user)
         console.log(res)
+        setIsAuthenticated(true);
     }catch (error) {
         if (Array.isArray(error.response.data)) {
             return setErrors(error.response.data);
@@ -52,6 +55,30 @@ useEffect(() => {
     }
 }, [errors]);
 
+
+useEffect(() => {
+    async function checkLogin () {
+        const cookies = Cookies.get();
+        if (!cookies.token) {
+            setIsAuthenticated(false);
+            setUser(null);
+            return;
+        }
+
+        try{
+            const res = await verifyTokenRequest(cookies.token)
+            console.log(res)
+            if (!res.data) setIsAuthenticated(false);
+
+            setIsAuthenticated(true);
+            setUser(res.data);
+        } catch(error){
+            setIsAuthenticated(false);
+            setUser(null);
+        }
+        }
+        checkLogin();
+}, []);
 return (
     <AuthContext.Provider 
     value={{

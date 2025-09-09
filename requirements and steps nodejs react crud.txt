@@ -50,3 +50,5 @@ npm install react-hook-form
 npm i axios // biblioteca que engloba fetch, no reemplazo
 
 npm i cors
+
+npm i js-cookie
