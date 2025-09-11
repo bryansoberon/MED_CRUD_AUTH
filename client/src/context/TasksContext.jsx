@@ -5,7 +5,7 @@ const TaskContext = createContext();
 export const useTasks = () => {
     const context = useContext(TaskContext);
     if (!context) {
-        throw new Error('useAuth must be used within a AuthProvider');
+        throw new Error('useTasks must be used within a TaskProvider');
     }
     return context;
 }
@@ -13,10 +13,14 @@ export const useTasks = () => {
 
 export function TaskProvider({children}) {
 
-    const [task, setTask] = useState([]);
+    const [tasks, setTasks] = useState([]);
     const getTasks = async () => {
-        const res = await getTasksRequest()
-        console.log(res);
+        try {
+            const res = await getTasksRequest();
+            setTasks(res.data);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const createTask = async (tasks) => {
@@ -27,7 +31,7 @@ export function TaskProvider({children}) {
     return (
         <TaskContext.Provider 
         value={{
-            task,
+            tasks,
             createTask,
             getTasks
         }}>

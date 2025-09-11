@@ -1,6 +1,6 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import { TaskProvider } from './context/TaskContext';
+import { TaskProvider } from './context/TasksContext';
 
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
