@@ -6,7 +6,7 @@ function Navbar() {
     console.log(user);
     return (
         <nav className="flex justify-between items-center bg-zinc-800 p-4 text-white">
-            <Link to ="/"> <h1 className='text-3xl font-bold'>Task Manager</h1>
+            <Link to ="/tasks"> <h1 className='text-3xl font-bold'>Task Manager</h1>
             </Link>
 
             <ul className="flex gap-x-2">
@@ -14,7 +14,7 @@ function Navbar() {
                     <>
                     <li>Welcome {user.username}</li>
                     <li> 
-                        <Link to="/add-task"> 
+                        <Link to="/add-task"  className='bg-indigo-500 px-4 py-2 rounded-sm'> 
                         New Task
                         </Link> 
                     </li> 
@@ -25,10 +25,10 @@ function Navbar() {
                 ):(
                 <>
                 <li>
-                    <Link to="/login"> Login </Link> 
+                    <Link to="/login" className='bg-indigo-500 px-4 py-2 rounded-sm'> Login </Link> 
                 </li> 
                 <li>    
-                    <Link to="/register"> Register </Link>                </li> 
+                    <Link to="/register" className='bg-indigo-500 px-4 py-2 rounded-sm'> Register </Link>                </li> 
                 </>
             )}
             </ul>
