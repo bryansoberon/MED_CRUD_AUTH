@@ -8,7 +8,7 @@ import { register,
 import  { authRequired }  from "../middlewares/validateToken.js";
 import { validateSchema } from "../middlewares/validator.middleware.js";
 import { registerSchema, loginSchema } from "../schemas/auth.schema.js";
-import { verifyToken } from "../../client/src/api/auth.js";
+import { verifyToken } from "../controllers/auth.controller.js";
 
 
 const router = Router();
