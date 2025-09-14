@@ -10,6 +10,7 @@ import TaskFormPage from "./pages/TasksFormPage";
 
 import { LoginPage } from "./pages/LoginPage";
 import { TasksPage } from "./pages/TasksPage";
+import ProfilePage from "./pages/ProfilePage";
 import { TaskProvider } from "./context/tasksContext";
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
                 <Route path="/tasks" element={<TasksPage />} />
                 <Route path="/add-task" element={<TaskFormPage />} />
                 <Route path="/tasks/:id" element={<TaskFormPage />} />
-                <Route path="/profile" element={<h1>Profile</h1>} />
+                <Route path="/profile" element={<ProfilePage />} />
               </Route>
             </Routes>
           </main>

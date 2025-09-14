@@ -21,6 +21,9 @@ export function Navbar() {
               <ButtonLink to="/add-task">Agregar Tarea nueva</ButtonLink>
             </li>
             <li>
+              <ButtonLink to="/profile">Mi Perfil</ButtonLink>
+            </li>
+            <li>
               <Link to="/" onClick={() => logout()}>
                 Cerrar Sesión
               </Link>
