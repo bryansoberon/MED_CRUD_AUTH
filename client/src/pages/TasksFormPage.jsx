@@ -1,33 +1,92 @@
-import {useForm} from 'react-hook-form';
-import { useTasks } from '../context/TasksContext';
-import {useNavigate} from 'react-router-dom';
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import { Button, Card, Input, Label } from "../components/ui";
+import { useTasks } from "../context/tasksContext";
+import { Textarea } from "../components/ui/Textarea";
+import { useForm } from "react-hook-form";
+dayjs.extend(utc);
 
+export function TaskFormPage() {
+  const { createTask, getTask, updateTask } = useTasks();
+  const navigate = useNavigate();
+  const params = useParams();
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-function TaskFormPage () {
-    const {register, handleSubmit} = useForm();
-    const {createTask} = useTasks();
-    const navigate = useNavigate();
+  const onSubmit = async (data) => {
+    try {
+      if (params.id) {
+        const taskData = {
+          ...data,
+          date: data.date ? dayjs(data.date).format("YYYY-MM-DD") : undefined,
+        };
+        updateTask(params.id, taskData);
+      } else {
+        const taskData = {
+          ...data,
+          date: data.date ? dayjs(data.date).format("YYYY-MM-DD") : undefined,
+        };
+        createTask(taskData);
+      }
 
-    const onSubmit = handleSubmit((data) => {
-        createTask(data);
-        navigate('/tasks');
-    });
-    return (
-        <div className='bg-zinc-800 max-w-md p-10 w-full roudend-md'>
-            <form onSubmit={onSubmit}>
-                <input type="text"  placeholder="Title"
-                {...register('title')}
-                className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'
-                autoFocus
-                />
+      navigate("/tasks");
+    } catch (error) {
+      console.log(error);
+      window.location.href = "/";
+    }
+  };
 
-                <textarea rows="4" placeholder="Description"
-                {...register('description')}
-                className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2'></textarea> 
-                <button>Save</button>
-            </form>
-        </div>
-    )
+  useEffect(() => {
+    const loadTask = async () => {
+      if (params.id) {
+        const task = await getTask(params.id);
+        setValue("title", task.title);
+        setValue("description", task.description);
+        setValue(
+          "date",
+          task.date ? dayjs(task.date).format("YYYY-MM-DD") : ""
+        );
+        setValue("completed", task.completed);
+      }
+    };
+    loadTask();
+  }, []);
+
+  return (
+    <Card>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Label htmlFor="title">Title</Label>
+        <Input
+          type="text"
+          name="title"
+          placeholder="Title"
+          {...register("title")}
+          autoFocus
+        />
+        {errors.title && (
+          <p className="text-red-500 text-xs italic">Please enter a title.</p>
+        )}
+
+        <Label htmlFor="description">Description</Label>
+        <Textarea
+          name="description"
+          id="description"
+          rows="3"
+          placeholder="Description"
+          {...register("description")}
+        ></Textarea>
+
+        <Label htmlFor="date">Date</Label>
+        <Input type="date" name="date" {...register("date")} />
+        <Button>Save</Button>
+      </form>
+    </Card>
+  );
 }
-
-export default TaskFormPage
+export default TaskFormPage;

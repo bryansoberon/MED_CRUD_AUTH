@@ -7,5 +7,5 @@ export const TaskSchema = z.object({
     description: z.string({
         required_error: "Description must be a string"
     }),
-    date: z.string().datetime().optional(),
+    date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
 });

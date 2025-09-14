@@ -1,24 +1,33 @@
-import { useEffect } from 'react';
-import { useTasks } from '../context/TasksContext'
-import TaskCard from '../components/TaskCard';
+import { useEffect } from "react";
+import { useTasks } from "../context/tasksContext";
+import { TaskCard } from "../components/tasks/TaskCard";
+import { ImFileEmpty } from "react-icons/im";
 
-function TasksPage() {
+export function TasksPage() {
+  const { tasks, getTasks } = useTasks();
 
-    const {getTasks, tasks} = useTasks();
+  useEffect(() => {
+    getTasks();
+  }, []);
 
-    useEffect(() =>{
-        getTasks();
-    }, [])
+  return (
+    <>
+      {tasks.length === 0 && (
+        <div className="flex justify-center items-center p-10">
+          <div>
+            <ImFileEmpty className="text-6xl text-gray-400 m-auto my-2" />
+            <h1 className="font-bold text-xl">
+              No tasks yet, please add a new task
+            </h1>
+          </div>
+        </div>
+      )}
 
-    if(tasks.length ===0) return (<h1>No hay tareas</h1>)
-
-    return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
         {tasks.map((task) => (
-            <TaskCard task={task} key={task._id} />
+          <TaskCard task={task} key={task._id} />
         ))}
-    </div>
-    );
+      </div>
+    </>
+  );
 }
-
-export default TasksPage;
