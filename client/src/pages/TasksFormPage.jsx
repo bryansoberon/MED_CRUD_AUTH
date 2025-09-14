@@ -84,7 +84,7 @@ export function TaskFormPage() {
 
         <Label htmlFor="date">Date</Label>
         <Input type="date" name="date" {...register("date")} />
-        <Button>Save</Button>
+        <Button>Guardar</Button>
       </form>
     </Card>
   );
