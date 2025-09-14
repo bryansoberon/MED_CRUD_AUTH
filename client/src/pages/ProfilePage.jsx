@@ -100,7 +100,7 @@ function ProfilePage() {
             <h2 className="text-2xl font-bold mb-4">Tareas Recientes</h2>
             <div className="space-y-3">
               {stats.recentTasks.map((task) => (
-                <div key={task._id} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                <div key={task._id} className="flex justify-between items-center p-3 bg-cyan-500 rounded-lg">
                   <div>
                     <h3 className="font-semibold">{task.title}</h3>
                     <p className="text-sm text-gray-600">
@@ -127,7 +127,7 @@ function ProfilePage() {
         <div className="p-6">
           <h2 className="text-2xl font-bold mb-4">Configuración de Cuenta</h2>
           <div className="space-y-4">
-            <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+            <div className="flex justify-between items-center p-4 bg-cyan-500 rounded-lg">
               <div>
                 <h3 className="font-semibold">Información de Usuario</h3>
                 <p className="text-sm text-gray-600">
@@ -139,7 +139,7 @@ function ProfilePage() {
               </div>
             </div>
             
-            <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+            <div className="flex justify-between items-center p-4 bg-cyan-500  rounded-lg">
               <div>
                 <h3 className="font-semibold">Cerrar Sesión</h3>
                 <p className="text-sm text-gray-600">
