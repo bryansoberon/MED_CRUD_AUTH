@@ -15,6 +15,7 @@ function Register() {
   } = useForm({
     resolver: zodResolver(registerSchema),
   });
+
   const navigate = useNavigate();
 
   const onSubmit = async (value) => {
@@ -26,62 +27,95 @@ function Register() {
   }, [isAuthenticated]);
 
   return (
-    <div className="h-[calc(100vh-100px)] flex items-center justify-center">
-      <Card>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 px-4">
+    <Card >
+        
+        {/* Errores */}
         {registerErrors.map((error, i) => (
           <Message message={error} key={i} />
         ))}
-        <h1 className="text-3xl font-bold">Registrarse</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Label htmlFor="username">Nombre de usuario:</Label>
-          <Input
-            type="text"
-            name="username"
-            placeholder="Write your name"
-            {...register("username")}
-            autoFocus
-          />
-          {errors.username?.message && (
-            <p className="text-red-500">{errors.username?.message}</p>
-          )}
 
-          <Label htmlFor="email">Correo:</Label>
-          <Input
-            name="email"
-            placeholder="youremail@domain.tld"
-            {...register("email")}
-          />
-          {errors.email?.message && (
-            <p className="text-red-500">{errors.email?.message}</p>
-          )}
+        <h1 className="text-3xl font-extrabold text-center text-white-800 mb-6">
+          Crear cuenta
+        </h1>
 
-          <Label htmlFor="password">Contraseña:</Label>
-          <Input
-            type="password"
-            name="password"
-            placeholder="********"
-            {...register("password")}
-          />
-          {errors.password?.message && (
-            <p className="text-red-500">{errors.password?.message}</p>
-          )}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          {/* Username */}
+          <div>
+            <Label htmlFor="username">Nombre de usuario:</Label>
+            <Input
+              type="text"
+              placeholder="Escribe tu nombre"
+              {...register("username")}
+              autoFocus
+              className="mt-1"
+            />
+            {errors.username && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.username.message}
+              </p>
+            )}
+          </div>
 
-          <Label htmlFor="confirmPassword">Confirmar Contraseña:</Label>
-          <Input
-            type="password"
-            name="confirmPassword"
-            placeholder="********"
-            {...register("confirmPassword")}
-          />
-          {errors.confirmPassword?.message && (
-            <p className="text-red-500">{errors.confirmPassword?.message}</p>
-          )}
-          <Button>Enviar</Button>
+          {/* Email */}
+          <div>
+            <Label htmlFor="email">Correo:</Label>
+            <Input
+              type="email"
+              placeholder="Escribe tu correo"
+              {...register("email")}
+              className="mt-1"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
+
+          {/* Password */}
+          <div>
+            <Label htmlFor="password">Contraseña:</Label>
+            <Input
+              type="password"
+              placeholder="••••••••"
+              {...register("Escribe tu contraseña")}
+              className="mt-1"
+            />
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+
+          {/* Confirm Password */}
+          <div>
+            <Label htmlFor="confirmPassword">Confirmar contraseña:</Label>
+            <Input
+              type="password"
+              placeholder="••••••••"
+              {...register("confirmPassword")}
+              className="mt-1"
+            />
+            {errors.confirmPassword && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.confirmPassword.message}
+              </p>
+            )}
+          </div>
+
+          {/* Submit */}
+          <Button className="w-full bg-indigo-600 hover:bg-indigo-700 transition">
+            Registrarse
+          </Button>
         </form>
-        <p>
-          Ya tienes una cuenta?
-          <Link className="text-sky-500" to="/login">
-            Iniciar Sesión
+
+        {/* Login link */}
+        <p className="text-center text-white-600 mt-6">
+          ¿Ya tienes una cuenta?{" "}
+          <Link to="/login" className="text-indigo-600 font-semibold hover:underline">
+            Inicia sesión
           </Link>
         </p>
       </Card>

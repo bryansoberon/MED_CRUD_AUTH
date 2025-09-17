@@ -44,7 +44,7 @@ export function LoginPage() {
             <Label htmlFor="email">Correo:</Label>
             <Input
               type="email"
-              placeholder="youremail@domain.tld"
+              placeholder="Escriba su correo"
               {...register("email", { required: true })}
               className="mt-1"
             />
