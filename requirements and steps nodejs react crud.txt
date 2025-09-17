@@ -59,4 +59,5 @@ npm audit fix
 
 npm install react-icons
 
-npm install @hookform/resolvers zod
+usuario: tareasbryan@gmail.com
+Iphone82022123.
