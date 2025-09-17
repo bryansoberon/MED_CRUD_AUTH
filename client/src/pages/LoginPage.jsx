@@ -14,6 +14,7 @@ export function LoginPage() {
   } = useForm({
     resolver: zodResolver(loginSchema),
   });
+
   const { signin, errors: loginErrors, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
@@ -26,38 +27,62 @@ export function LoginPage() {
   }, [isAuthenticated]);
 
   return (
-    <div className="h-[calc(100vh-100px)] flex items-center justify-center">
-      <Card>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 px-4">
+      <Card className="w-full max-w-md bg-white/90 backdrop-blur-md shadow-xl rounded-2xl p-8">
+        {/* Errores de login */}
         {loginErrors.map((error, i) => (
           <Message message={error} key={i} />
         ))}
-        <h1 className="text-2xl font-bold">Bienvenido de nuevo</h1>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Label htmlFor="email">Correo:</Label>
-          <Input
-            label="Write your email"
-            type="email"
-            name="email"
-            placeholder="youremail@domain.tld"
-            {...register("email", { required: true })}
-          />
-          <p>{errors.email?.message}</p>
+        <h1 className="text-3xl font-extrabold text-center text-white drop-shadow-lg mb-6">
+          Bienvenido de nuevo
+        </h1>
 
-          <Label htmlFor="password">Contraseña:</Label>
-          <Input
-            type="password"
-            name="password"
-            placeholder="Write your password"
-            {...register("password", { required: true, minLength: 6 })}
-          />
-          <p>{errors.password?.message}</p>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          {/* Email */}
+          <div>
+            <Label htmlFor="email">Correo:</Label>
+            <Input
+              type="email"
+              placeholder="youremail@domain.tld"
+              {...register("email", { required: true })}
+              className="mt-1"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
 
-          <Button>Iniciar Sesión</Button>
+          {/* Password */}
+          <div>
+            <Label htmlFor="password">Contraseña:</Label>
+            <Input
+              type="password"
+              placeholder="••••••••"
+              {...register("password", { required: true, minLength: 6 })}
+              className="mt-1"
+            />
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
+
+          {/* Botón */}
+          <Button className="w-full bg-indigo-600 hover:bg-indigo-700 transition">
+            Iniciar Sesión
+          </Button>
         </form>
 
-        <p className="flex gap-x-2 justify-between">
-          No tienes una cuenta? <Link to="/register" className="text-sky-500">Registrate</Link>
+        {/* Registro */}
+        <p className="text-center text-white-600 mt-6">
+          ¿No tienes una cuenta?{" "}
+          <Link to="/register" className="text-indigo-600 font-semibold hover:underline">
+            Regístrate
+          </Link>
         </p>
       </Card>
     </div>
