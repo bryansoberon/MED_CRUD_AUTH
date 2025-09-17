@@ -6,6 +6,7 @@ import { Button, Card, Input, Label } from "../components/ui";
 import { useTasks } from "../context/tasksContext";
 import { Textarea } from "../components/ui/Textarea";
 import { useForm } from "react-hook-form";
+
 dayjs.extend(utc);
 
 export function TaskFormPage() {
@@ -21,17 +22,14 @@ export function TaskFormPage() {
 
   const onSubmit = async (data) => {
     try {
+      const taskData = {
+        ...data,
+        date: data.date ? dayjs(data.date).format("YYYY-MM-DD") : undefined,
+      };
+
       if (params.id) {
-        const taskData = {
-          ...data,
-          date: data.date ? dayjs(data.date).format("YYYY-MM-DD") : undefined,
-        };
         updateTask(params.id, taskData);
       } else {
-        const taskData = {
-          ...data,
-          date: data.date ? dayjs(data.date).format("YYYY-MM-DD") : undefined,
-        };
         createTask(taskData);
       }
 
@@ -48,10 +46,7 @@ export function TaskFormPage() {
         const task = await getTask(params.id);
         setValue("title", task.title);
         setValue("description", task.description);
-        setValue(
-          "date",
-          task.date ? dayjs(task.date).format("YYYY-MM-DD") : ""
-        );
+        setValue("date", task.date ? dayjs(task.date).format("YYYY-MM-DD") : "");
         setValue("completed", task.completed);
       }
     };
@@ -59,34 +54,57 @@ export function TaskFormPage() {
   }, []);
 
   return (
-    <Card>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Label htmlFor="title">Title</Label>
-        <Input
-          type="text"
-          name="title"
-          placeholder="Title"
-          {...register("title")}
-          autoFocus
-        />
-        {errors.title && (
-          <p className="text-red-500 text-xs italic">Please enter a title.</p>
-        )}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 px-4">
+      <Card>
+        <h1 className="text-3xl font-extrabold text-center text-white-800 mb-6">
+          {params.id ? "Editar tarea" : "Nueva tarea"}
+        </h1>
 
-        <Label htmlFor="description">Description</Label>
-        <Textarea
-          name="description"
-          id="description"
-          rows="3"
-          placeholder="Description"
-          {...register("description")}
-        ></Textarea>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          {/* Title */}
+          <div>
+            <Label htmlFor="title">Título</Label>
+            <Input
+              type="text"
+              placeholder="Escribe el título"
+              {...register("title")}
+              autoFocus
+              className="mt-1"
+            />
+            {errors.title && (
+              <p className="text-red-500 text-sm mt-1">Por favor ingresa un título.</p>
+            )}
+          </div>
 
-        <Label htmlFor="date">Date</Label>
-        <Input type="date" name="date" {...register("date")} />
-        <Button>Guardar</Button>
-      </form>
-    </Card>
+          {/* Description */}
+          <div>
+            <Label htmlFor="description">Descripción</Label>
+            <Textarea
+              rows="3"
+              placeholder="Detalles de la tarea..."
+              {...register("description")}
+              className="mt-1"
+            />
+          </div>
+
+          {/* Date */}
+          <div>
+            <Label htmlFor="date">Fecha límite</Label>
+            <Input
+              type="date"
+              {...register("date")}
+              className="mt-1"
+            />
+          </div>
+
+          {/* Submit */}
+          <Button className="w-full bg-indigo-600 hover:bg-indigo-700 transition">
+            Guardar
+          </Button>
+        </form>
+      </Card>
+    </div>
   );
 }
+
 export default TaskFormPage;

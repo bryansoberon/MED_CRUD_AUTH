@@ -28,7 +28,7 @@ export function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 px-4">
-      <Card className="w-full max-w-md bg-white/90 backdrop-blur-md shadow-xl rounded-2xl p-8">
+      <Card >
         {/* Errores de login */}
         {loginErrors.map((error, i) => (
           <Message message={error} key={i} />
@@ -44,7 +44,7 @@ export function LoginPage() {
             <Label htmlFor="email">Correo:</Label>
             <Input
               type="email"
-              placeholder="Escriba su correo"
+              placeholder="Escribe tu correo"
               {...register("email", { required: true })}
               className="mt-1"
             />
