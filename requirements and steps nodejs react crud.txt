@@ -59,5 +59,4 @@ npm audit fix
 
 npm install react-icons
 
-usuario: tareasbryan@gmail.com
-Iphone82022123.
+
